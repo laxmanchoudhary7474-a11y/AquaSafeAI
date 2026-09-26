@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: aquasafeai-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-aquasafe}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-aquasafe_secret}
+      POSTGRES_DB: ${DB_NAME:-aquasafeai}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
